@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Suite - Developer Utilities</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-tools"></i>
+                    <h1>DevTools Suite</h1>
+                </div>
+                <p class="subtitle">Essential developer utilities in one place</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-items">
+                <button class="nav-item active" data-tool="url-shortener">
+                    <i class="fas fa-link"></i>
+                    <span>URL Shortener</span>
+                </button>
+                <button class="nav-item" data-tool="base64">
+                    <i class="fas fa-code"></i>
+                    <span>Base64</span>
+                </button>
+                <button class="nav-item" data-tool="hash">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Hash Generator</span>
+                </button>
+                <button class="nav-item" data-tool="qr-code">
+                    <i class="fas fa-qrcode"></i>
+                    <span>QR Code</span>
+                </button>
+                <button class="nav-item" data-tool="id-generator">
+                    <i class="fas fa-fingerprint"></i>
+                    <span>ID Generator</span>
+                </button>
+                <button class="nav-item" data-tool="jwt">
+                    <i class="fas fa-key"></i>
+                    <span>JWT Tool</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- URL Shortener Tool -->
+            <div class="tool-panel active" id="url-shortener">
+                <div class="tool-header">
+                    <h2><i class="fas fa-link"></i> URL Shortener</h2>
+                    <p>Create short URLs for easy sharing</p>
+                </div>
+                <div class="tool-content">
+                    <div class="input-group">
+                        <label for="original-url">Original URL</label>
+                        <input type="url" id="original-url" placeholder="https://example.com">
+                        <button id="shorten-btn" class="btn btn-primary">
+                            <i class="fas fa-compress-alt"></i>
+                            Shorten URL
+                        </button>
+                    </div>
+                    <div class="result-section" id="url-result" style="display: none;">
+                        <div class="result-card">
+                            <h3>Shortened URL</h3>
+                            <div class="url-display">
+                                <input type="text" id="short-url" readonly>
+                                <button class="btn btn-secondary" id="copy-url">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="short-code">Decode Short Code</label>
+                        <input type="text" id="short-code" placeholder="Enter short code">
+                        <button id="decode-btn" class="btn btn-secondary">
+                            <i class="fas fa-expand-alt"></i>
+                            Get Original URL
+                        </button>
+                    </div>
+                    <div class="result-section" id="decode-result" style="display: none;">
+                        <div class="result-card">
+                            <h3>Original URL</h3>
+                            <div class="url-display">
+                                <input type="text" id="decoded-url" readonly>
+                                <button class="btn btn-secondary" id="copy-decoded">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Base64 Tool -->
+            <div class="tool-panel" id="base64">
+                <div class="tool-header">
+                    <h2><i class="fas fa-code"></i> Base64 Encoder/Decoder</h2>
+                    <p>Encode and decode Base64 strings</p>
+                </div>
+                <div class="tool-content">
+                    <div class="base64-container">
+                        <div class="base64-section">
+                            <h3>Encode</h3>
+                            <textarea id="encode-input" placeholder="Enter text to encode..."></textarea>
+                            <button id="encode-btn" class="btn btn-primary">
+                                <i class="fas fa-arrow-right"></i>
+                                Encode
+                            </button>
+                            <textarea id="encode-output" placeholder="Encoded result..." readonly></textarea>
+                        </div>
+                        <div class="base64-section">
+                            <h3>Decode</h3>
+                            <textarea id="decode-input" placeholder="Enter Base64 to decode..."></textarea>
+                            <button id="decode-base64-btn" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                                Decode
+                            </button>
+                            <textarea id="decode-output" placeholder="Decoded result..." readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hash Generator Tool -->
+            <div class="tool-panel" id="hash">
+                <div class="tool-header">
+                    <h2><i class="fas fa-hashtag"></i> Hash Generator</h2>
+                    <p>Generate various hash types for your text</p>
+                </div>
+                <div class="tool-content">
+                    <div class="input-group">
+                        <label for="hash-input">Text to Hash</label>
+                        <textarea id="hash-input" placeholder="Enter text to hash..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="hash-algorithm">Algorithm</label>
+                        <select id="hash-algorithm">
+                            <option value="md5">MD5</option>
+                            <option value="sha1">SHA1</option>
+                            <option value="sha256" selected>SHA256</option>
+                            <option value="sha512">SHA512</option>
+                            <option value="crc32">CRC32</option>
+                        </select>
+                        <button id="generate-hash-btn" class="btn btn-primary">
+                            <i class="fas fa-cog"></i>
+                            Generate Hash
+                        </button>
+                    </div>
+                    <div class="result-section" id="hash-result" style="display: none;">
+                        <div class="result-card">
+                            <h3>Hash Result</h3>
+                            <div class="hash-display">
+                                <input type="text" id="hash-output" readonly>
+                                <button class="btn btn-secondary" id="copy-hash">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Generator Tool -->
+            <div class="tool-panel" id="qr-code">
+                <div class="tool-header">
+                    <h2><i class="fas fa-qrcode"></i> QR Code Generator</h2>
+                    <p>Generate QR codes for any text or URL</p>
+                </div>
+                <div class="tool-content">
+                    <div class="input-group">
+                        <label for="qr-input">Data for QR Code</label>
+                        <textarea id="qr-input" placeholder="Enter text, URL, or any data..."></textarea>
+                        <button id="generate-qr-btn" class="btn btn-primary">
+                            <i class="fas fa-qrcode"></i>
+                            Generate QR Code
+                        </button>
+                    </div>
+                    <div class="result-section" id="qr-result" style="display: none;">
+                        <div class="result-card">
+                            <h3>Generated QR Code</h3>
+                            <div class="qr-display">
+                                <img id="qr-image" alt="Generated QR Code">
+                                <button class="btn btn-secondary" id="download-qr">
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ID Generator Tool -->
+            <div class="tool-panel" id="id-generator">
+                <div class="tool-header">
+                    <h2><i class="fas fa-fingerprint"></i> ID Generator</h2>
+                    <p>Generate UUIDs and random strings</p>
+                </div>
+                <div class="tool-content">
+                    <div class="id-container">
+                        <div class="id-section">
+                            <h3>UUID Generator</h3>
+                            <button id="generate-uuid-btn" class="btn btn-primary">
+                                <i class="fas fa-refresh"></i>
+                                Generate UUID
+                            </button>
+                            <div class="id-display">
+                                <input type="text" id="uuid-output" readonly placeholder="Generated UUID will appear here">
+                                <button class="btn btn-secondary" id="copy-uuid">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="id-section">
+                            <h3>Random String Generator</h3>
+                            <div class="input-group">
+                                <label for="string-length">Length</label>
+                                <input type="number" id="string-length" value="12" min="1" max="100">
+                            </div>
+                            <button id="generate-string-btn" class="btn btn-secondary">
+                                <i class="fas fa-random"></i>
+                                Generate String
+                            </button>
+                            <div class="id-display">
+                                <input type="text" id="string-output" readonly placeholder="Generated string will appear here">
+                                <button class="btn btn-secondary" id="copy-string">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JWT Tool -->
+            <div class="tool-panel" id="jwt">
+                <div class="tool-header">
+                    <h2><i class="fas fa-key"></i> JWT Encoder/Decoder</h2>
+                    <p>Encode and decode JSON Web Tokens</p>
+                </div>
+                <div class="tool-content">
+                    <div class="jwt-container">
+                        <div class="jwt-section">
+                            <h3>Encode JWT</h3>
+                            <div class="input-group">
+                                <label for="jwt-payload">Payload (JSON)</label>
+                                <textarea id="jwt-payload" placeholder='{"user_id": 123, "role": "admin"}'></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="jwt-secret">Secret (optional)</label>
+                                <input type="text" id="jwt-secret" placeholder="Leave empty to use default">
+                            </div>
+                            <div class="input-group">
+                                <label for="jwt-expiry">Expiry (minutes)</label>
+                                <input type="number" id="jwt-expiry" value="60" min="1">
+                            </div>
+                            <button id="encode-jwt-btn" class="btn btn-primary">
+                                <i class="fas fa-lock"></i>
+                                Encode JWT
+                            </button>
+                            <textarea id="jwt-encoded" placeholder="Encoded JWT will appear here..." readonly></textarea>
+                        </div>
+                        <div class="jwt-section">
+                            <h3>Decode JWT</h3>
+                            <div class="input-group">
+                                <label for="jwt-token">JWT Token</label>
+                                <textarea id="jwt-token" placeholder="Enter JWT token to decode..."></textarea>
+                            </div>
+                            <div class="input-group">
+                                <label for="jwt-decode-secret">Secret (optional)</label>
+                                <input type="text" id="jwt-decode-secret" placeholder="Leave empty to use default">
+                            </div>
+                            <button id="decode-jwt-btn" class="btn btn-secondary">
+                                <i class="fas fa-unlock"></i>
+                                Decode JWT
+                            </button>
+                            <textarea id="jwt-decoded" placeholder="Decoded payload will appear here..." readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
