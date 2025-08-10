@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: devtools-suite
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn devtools_suite.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: devtools_suite.settings
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: SECRET_KEY
+        generateValue: true
