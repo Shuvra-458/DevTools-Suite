@@ -1,5 +1,5 @@
 // API Base URL - Update this to match your Django backend
-const API_BASE_URL = 'https://devtools-suite.onrender.com/';
+const API_BASE_URL = 'https://devtools-suite.onrender.com';
 
 // DOM Elements
 const navItems = document.querySelectorAll('.nav-item');
