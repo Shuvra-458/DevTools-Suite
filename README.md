@@ -1,62 +1,63 @@
 # DevTools Suite 🛠️
 
-A Django REST-based backend providing handy developer utilities such as:
+A Django REST backend providing handy developer utilities:
 - 🔗 **URL Shortener**
-- 📦 **Base64 Encoder/Decoder**
-- 🧾 **Hashing Functions** (MD5, SHA1, SHA256, SHA512, etc.)
+- 📦 **Base64 Encoder / Decoder**
+- 🧾 **Hashing Functions** (MD5, SHA1, SHA256, SHA3, BLAKE, CRC32, etc.)
 - 📷 **QR Code Generator**
+- 🆔 **ID Generator** (UUID4, random strings)
+- 🔐 **JWT Encoder / Decoder**
 
 ---
 
-## 🚀 Features
+## 🚀 Features & Endpoints
+
+> Base path = `http://127.0.0.1:8000/` (dev)
 
 ### 1. URL Shortener
-Create short URLs and retrieve the original.
-- **POST** `/shorten/create/` → Create a short link
-- **GET** `/shorten/<short_code>/` → Redirect or fetch the original URL
+- **Create short URL**  
+  `POST /shorten/create/`  
+  Body: `{ "original_url": "https://example.com" }`  
+- **Get original URL**  
+  `GET /shorten/<short_code>/`  
 
 ### 2. Base64 Tool
-Encode and decode text or files.
-- **POST** `/base64/encode/`
-- **POST** `/base64/decode/`
+- **Encode**  
+  `POST /base64/encode/`  
+  Body: `{ "text": "Hello" }`
+- **Decode**  
+  `POST /base64/decode/`  
+  Body: `{ "text": "SGVsbG8=" }`
 
 ### 3. Hashing Functions
-Generate hashes using various algorithms.
-- **POST** `/hash/generate/` → Pass text and select algorithm
+- **Generate hash**  
+  `POST /hash/create/`  
+  Body: `{ "text": "hello", "algorithm": "sha256" }`
+- **List supported algorithms**  
+  `GET /hash/list/`  
+  (Includes hashlib.algorithms_available + `crc32`)
 
 ### 4. QR Code Generator
-Generate QR codes from text or URLs.
-- **POST** `/qrcode/` → Returns a `.png` QR code
+- **Generate QR (returns PNG image)**  
+  `POST /qrcode/create/`  
+  Body: `{ "data": "https://example.com" }`  
+  Response: `image/png` binary (direct image)
 
----
+### 5. ID Generator (idgen)
+- **Generate UUID4**  
+  `GET /idgen/uuid/`  
+  Response: `{ "uuid": "..." }`
+- **Generate random alphanumeric string**  
+  `GET /idgen/random-string/?length=12`  
+  Response: `{ "random_string": "..." }`
 
-## 🛠️ Tech Stack
-- **Backend**: Django 5 + Django REST Framework
-- **Database**: MySQL (configurable)
-- **Other**: python-qrcode, Pillow, dotenv, CORS headers
-
----
-
-## 📦 Installation
-
-```bash
-# 1. Clone repo
-git clone https://github.com/<your-username>/devtools_suite.git
-cd devtools_suite
-
-# 2. Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Setup .env file
-cp .env.example .env
-# Fill in your DB credentials and secret key
-
-# 5. Run migrations
-python manage.py migrate
-
-# 6. Start development server
-python manage.py runserver
+### 6. JWT Tool (jwttool)
+- **Encode JWT**  
+  `POST /jwt/encode/`  
+  Body example:
+  ```json
+  {
+    "payload": { "user_id": 123, "role": "admin" },
+    "secret": "mysecret",        // optional; defaults to SECRET_KEY
+    "exp_minutes": 60            // optional
+  }
