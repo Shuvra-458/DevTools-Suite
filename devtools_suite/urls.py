@@ -20,8 +20,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/shorten/', include('urlshortener.urls')),
-    path('api/base64/', include('base64tool.urls')),
+    path('shorten/', include('urlshortener.urls')),
+    path('base64/', include('base64tool.urls')),
     path('api/core', include('core.urls')),
     path('api/qrcode/', include('qrcodegen.urls')),
     path('api/idgen/', include('idgen.urls')),
